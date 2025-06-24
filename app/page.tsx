@@ -52,7 +52,6 @@ export default function Portfolio() {
     mobile: [
       "Flutter",
       "Dart",
-      "React Native",
       "iOS Development",
       "Android Development",
       "Firebase",
@@ -63,18 +62,15 @@ export default function Portfolio() {
       "Cross-platform",
     ],
     backend: [
-      "Node.js",
       "FastAPI",
       "Python",
       "Express.js",
       "MongoDB",
       "PostgreSQL",
       "MySQL",
-      "GraphQL",
       "REST APIs",
-      "Database Design",
-      "API Testing",
-      "API Documentation",
+  
+
     ],
     problemSolving: [
       "Data Structures",
@@ -94,9 +90,7 @@ export default function Portfolio() {
       "Figma",
       "Postman",
       "VS Code",
-      "Xcode",
-      "Android Studio",
-      "Firebase Console",
+     
 
     ],
   }
@@ -212,7 +206,7 @@ export default function Portfolio() {
     medium: 280,
     hard: 10,
     ranking: "Top 15%",
-    streak: 45,
+
     
     rating: 1370,
   }
@@ -220,16 +214,17 @@ export default function Portfolio() {
   const a2svAchievements = [
     {
       title: "Backend Development ",
-      description: "Worked on building scalable backend services for A2SV projects",
-      duration: "Jan 2025 - Present",
+      description:
+        "Collaborated with a team to design and develop scalable backend services with A2SV Team, ensuring high performance, reliability, and smooth integration with frontend applications.",
+      duration: "july 2025 - Present",
     },
     {
-      title: "Mobile Development",
-      description: "Flutter Hybrid development and cross-platform mobile app creation",
-      duration: "Sep 2022 - present",
+      title: "Mobile Development @ Mint",
+      description:
+        "Developed a cross-platform mobile application using Flutter in collaboration with a development team for the Ministry of Innovation and Technology.",
+      duration: "Sep 2023 - Jan 2024",
     },
-  
-  ]
+  ];
 
   const [selectedCategory, setSelectedCategory] = useState("All")
   const categories = ["All", "Mobile App", "Backend", "Full Stack",]
@@ -373,10 +368,10 @@ export default function Portfolio() {
               className="w-80 h-80 rounded-full mx-auto mb-6 border-4 border-primary/20"
             /> */}
             <h1 className="text-4xl md:text-6xl font-bold mb-4">
-              Full-Stack Mobile Developer
+              Mobile Developer
             </h1>
             <p className="text-xl md:text-2xl text-muted-foreground mb-4 max-w-3xl mx-auto">
-              Building exceptional mobile experiences with Flutter powered by
+              Building exceptional mobile experiences with Flutter, powered by
               robust backend solutions and strong problem-solving skills
             </p>
             <div className="flex flex-wrap justify-center gap-2 mb-8">
@@ -384,10 +379,7 @@ export default function Portfolio() {
                 <Trophy className="mr-1 h-3 w-3" />
                 A2SV Trainee
               </Badge>
-              <Badge variant="secondary" className="text-sm">
-                <Target className="mr-1 h-3 w-3" />
-                LeetCode Top 15%
-              </Badge>
+
               <Badge variant="secondary" className="text-sm">
                 <Code className="mr-1 h-3 w-3" />
                 500+ Problems Solved
@@ -480,8 +472,9 @@ export default function Portfolio() {
                 </CardHeader>
                 <CardContent>
                   <p>
-                    Specialized in hybrid frameworks. with focus on performance,
-                    user experience, and cross-platform compatibility.
+                    Specialized in Flutter Development, with focus on
+                    performance, user experience, and cross-platform
+                    compatibility.
                   </p>
                 </CardContent>
               </Card>
@@ -489,12 +482,12 @@ export default function Portfolio() {
                 <CardHeader>
                   <CardTitle className="flex items-center">
                     <Server className="mr-2 h-5 w-5 text-primary" />
-                    Backend Engineering
+                    Backend Development
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p>
-                    Building scalable APIs and backend services using Node.js,
+                    Building scalable APIs and backend services using Go,
                     FastAPI, and cloud technologies with microservices
                     architecture.
                   </p>
@@ -682,7 +675,7 @@ export default function Portfolio() {
                           rel="noopener noreferrer"
                         >
                           <ExternalLink className="mr-1 h-3 w-3" />
-                          Demo
+                          Design
                         </a>
                       </Button>
                     </div>
@@ -774,16 +767,7 @@ export default function Portfolio() {
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-2 gap-4 pt-4 border-t">
-                    <div className="text-center">
-                      <div className="text-xl font-bold text-primary">
-                        {leetcodeStats.streak}
-                      </div>
-                      <div className="text-sm text-muted-foreground">
-                        Day Streak
-                      </div>
-                    </div>
-                  </div>
+                  <div className="grid grid-cols-2 gap-4 pt-4 border-t"></div>
                 </CardContent>
               </Card>
             </div>
@@ -792,7 +776,7 @@ export default function Portfolio() {
             <div>
               <h3 className="text-2xl font-semibold mb-6 flex items-center">
                 <Award className="mr-2 h-6 w-6 text-primary" />
-                A2SV Experience
+                Development Experience
               </h3>
               <div className="space-y-6">
                 {a2svAchievements.map((achievement, index) => (
@@ -816,7 +800,7 @@ export default function Portfolio() {
             </div>
           </div>
 
-          {/* Skills Highlight */}
+          {/* Skills Highlight
           <div className="mt-12">
             <h3 className="text-2xl font-semibold mb-6 text-center">
               Core Problem Solving Skills
@@ -907,7 +891,7 @@ export default function Portfolio() {
                 </CardContent>
               </Card>
             </div>
-          </div>
+          </div> */}
         </div>
       </section>
 
@@ -931,22 +915,46 @@ export default function Portfolio() {
               <div className="space-y-4">
                 <div className="flex items-center">
                   <Mail className="mr-3 h-5 w-5 text-primary" />
-                  <span>robsenteshoma1@example.com</span>
+                  <a
+                    href="mailto:robsenteshoma1@gmail.com"
+                    className="text-primary hover:underline"
+                  >
+                    robsenteshoma1@gmail.com
+                  </a>
                 </div>
                 <div className="flex items-center">
                   <Github className="mr-3 h-5 w-5 text-primary" />
-                  <span>github.com/</span>
-                  <span>github.com/</span>
+                  <a
+                    href="https://github.com/robsen123-fexil"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary hover:underline"
+                  >
+                    https://github.com/robsen123-fexil
+                  </a>
                 </div>
                 <div className="flex items-center">
                   <Linkedin className="mr-3 h-5 w-5 text-primary" />
-                  <span>
+                  <a
+                    href="https://www.linkedin.com/in/robsen-teshome-889926254/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary hover:underline"
+                  >
                     https://www.linkedin.com/in/robsen-teshome-889926254/
-                  </span>
+                  </a>
                 </div>
+                
                 <div className="flex items-center">
                   <Code className="mr-3 h-5 w-5 text-primary" />
-                  <span>https://leetcode.com/u/robsen/</span>
+                  <a
+                    href="https://leetcode.com/u/robsen/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary hover:underline"
+                  >
+                    https://leetcode.com/u/robsen/
+                  </a>
                 </div>
               </div>
 
@@ -959,7 +967,7 @@ export default function Portfolio() {
                   <li>• Mobile App Development Projects</li>
                   <li>• Backend API Development</li>
                   <li>• Technical Mentoring & Code Reviews</li>
-                  <li>• Competitive Programming Collaboration</li>
+               
                 </ul>
               </div>
             </div>
