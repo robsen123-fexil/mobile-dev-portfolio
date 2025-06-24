@@ -386,15 +386,30 @@ export default function Portfolio() {
               </Badge>
             </div>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" onClick={() => scrollToSection("projects")}>
-                View My Work
-              </Button>
-              <a href="/Robsen(Flutter).pdf" download>
-                <button className="px-4 py-2 bg-blue-600 text-white rounded">
-                  Download Resume
-                </button>
-              </a>
-            </div>
+  <button
+    onClick={() => scrollToSection("projects")}
+    className="px-4 py-2 bg-blue-600 text-white rounded"
+  >
+    View My Work
+  </button>
+
+  <a
+    href="https://flowcv.com/resume/gp1l2eafqi"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    <button className="px-4 py-2 bg-blue-600 text-white rounded">
+      View Resume
+    </button>
+  </a>
+
+  <a href="/Robsen(Flutter).pdf" download>
+    <button className="px-4 py-2 bg-blue-600 text-white rounded">
+      Download Resume
+    </button>
+  </a>
+</div>
+
           </div>
 
           <div className="flex justify-center space-x-6 text-muted-foreground">
@@ -944,7 +959,7 @@ export default function Portfolio() {
                     https://www.linkedin.com/in/robsen-teshome-889926254/
                   </a>
                 </div>
-                
+
                 <div className="flex items-center">
                   <Code className="mr-3 h-5 w-5 text-primary" />
                   <a
@@ -967,7 +982,6 @@ export default function Portfolio() {
                   <li>• Mobile App Development Projects</li>
                   <li>• Backend API Development</li>
                   <li>• Technical Mentoring & Code Reviews</li>
-               
                 </ul>
               </div>
             </div>
