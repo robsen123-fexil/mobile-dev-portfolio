@@ -1,35 +1,203 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useEffect, useState } from "react"
+import Image from "next/image"
 import {
-  Moon,
-  Sun,
-  Menu,
-  X,
+  Award,
+  Briefcase,
+  Code,
+  Download,
   Github,
+  GraduationCap,
   Linkedin,
   Mail,
-  ExternalLink,
-  Download,
-  Code,
-  Smartphone,
+  MapPin,
+  Menu,
+  Moon,
   Server,
+  Smartphone,
+  Sun,
   Trophy,
-  Target,
-  Calendar,
-  Award,
-  Brain,
-  Cpu,
-  Database,
-  Globe,
+  X,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Progress } from "@/components/ui/progress"
 import { useTheme } from "next-themes"
+
+const navItems = [
+  { id: "about", label: "About" },
+  { id: "skills", label: "Skills" },
+  { id: "experience", label: "Experience" },
+  { id: "projects", label: "Projects" },
+  { id: "education", label: "Education" },
+  { id: "achievements", label: "Achievements" },
+  { id: "contact", label: "Contact" },
+]
+
+const skillGroups = [
+  {
+    title: "Mobile",
+    icon: Smartphone,
+    items: ["Flutter", "Dart", "MVVM", "Clean Architecture"],
+  },
+  {
+    title: "Backend / Fullstack",
+    icon: Server,
+    items: ["Python (FastAPI, Django)", "RESTful API Design", "Cloud Backend Services"],
+  },
+  {
+    title: "Databases & Cloud Data Services",
+    icon: Server,
+    items: ["Cloud NoSQL Database", "Supabase", "PostgreSQL", "MongoDB", "SQL"],
+  },
+  {
+    title: "Tools",
+    icon: Code,
+    items: [
+      "Git",
+      "GitHub",
+      "Postman",
+      "Swagger / OpenAPI",
+      "Android Studio",
+      "VS Code",
+      "Figma",
+      "AI tools (Claude, ChatGPT, GitHub Copilot)",
+    ],
+  },
+  {
+    title: "Other",
+    icon: Award,
+    items: ["Data Structures & Algorithms", "Competitive Programming", "Agile Development"],
+  },
+]
+
+const experience = [
+  {
+    role: "Mobile Developer Intern (Flutter)",
+    org: "Internship Program, MinT",
+    place: "Addis Ababa",
+    period: "2023–2024",
+    points: [
+      "Worked with a team on mobile application development, building Flutter apps with cloud backend services for auth, storage, and real-time features.",
+      "Ran regression and manual UI testing across Android devices, reporting defects that improved stability.",
+      "Built and validated backend APIs, checking request/response behavior and data integrity.",
+    ],
+  },
+  {
+    role: "Software Engineering Trainee, Fullstack & Mobile Development",
+    org: "African To Silicon Valley (A2SV)",
+    place: "Adama",
+    period: "2025–2026",
+    points: [
+      "Worked with a team on mobile application development using Clean Architecture, aligned with DSA practice.",
+      "Built and manually tested RESTful APIs with Python (FastAPI) and cloud backend services, catching edge-case failures.",
+      "Ran regression testing across fullstack features, tracing issues from the Flutter front end through backend services and resolving defects with peers.",
+    ],
+  },
+]
+
+const projects = [
+  {
+    title: "ShopAlly",
+    client: "A2SV team project · Mobile Team Lead",
+    description:
+      "AI-powered Alibaba shopping app: describe what you need in your own language and get matching products, with a creative e-commerce UI. Won 1st place in the A2SV G6 project phase for code quality and teamwork.",
+    image: "/projects/shopally.jpg",
+    alt: "ShopAlly product grid showing Alibaba listings in a Flutter shopping app",
+    technologies: ["Flutter", "Dart", "AI integration", "Go backend"],
+  },
+  {
+    title: "Imerzn",
+    client: "US tour & travel agency client",
+    description:
+      "Mobile work for a US tour and travel agency, connecting them with travelers and supporting their shipping workflow. Integrated the client's live backend and built the UI with MVVM.",
+    image: "/projects/imerzn.webp",
+    alt: "Imerzn tour and travel mobile app screen",
+    technologies: ["Flutter", "Dart", "REST APIs", "MVVM"],
+  },
+  {
+    title: "Brunch Sister",
+    client: "US client",
+    description:
+      "Moved an event creation and management platform from Base44 to a live mobile app using Flutter and Supabase.",
+    image: "/projects/brunch.jpg",
+    alt: "Brunch Sister home screen listing restaurants with ratings and a calendar tab",
+    technologies: ["Flutter", "Dart", "Supabase"],
+  },
+  {
+    title: "SmartFarmer",
+    client: "Hubstaff client from India",
+    description:
+      "Captures images, sends them to an AI dataset backend, and displays the returned result. Includes a chat with an AI bot and a library of books on agricultural diseases.",
+    image: "/projects/smartfarmer.jpg",
+    alt: "SmartFarmer result screen describing a soybean leaf disease and recommendations",
+    technologies: ["Flutter", "Dart", "REST APIs", "AI integration"],
+  },
+  {
+    title: "Yeneqal",
+    client: "US client",
+    description:
+      "Amharic-augmented language learning app for young children, with a kid-friendly tablet mode and tap-to-hear audio.",
+    image: "/projects/yenqal.png",
+    alt: "Yeneqal tablet screen of illustrated Amharic communication tiles",
+    technologies: ["Flutter", "Dart"],
+  },
+  {
+    title: "AutoRent",
+    client: "Local client",
+    description:
+      "Vehicle rental platform for a local client and its local customers: real-time availability, automated booking, and payments.",
+    image: "/projects/autorent.png",
+    alt: "AutoRent car rental screens showing vehicle search, details, and booking",
+    technologies: ["Flutter", "Cloud Backend Services"],
+    github: "https://github.com/robsen123-fexil/autorent.flutter",
+  },
+  {
+    title: "Betlink",
+    client: "Mobile property marketplace",
+    description:
+      "Property marketplace for buyers and sellers, with regression-tested search, filtering, and messaging across Android devices.",
+    image: "/projects/betlink.jpg",
+    alt: "Betlink welcome screen with login and register",
+    technologies: ["Flutter", "Dart"],
+  },
+  {
+    title: "AI Health Assistant",
+    client: "Multilingual AI health app",
+    description:
+      "User-friendly mobile UI (APK) for a multilingual AI health app, integrated with a TypeScript backend using MongoDB and SQL.",
+    technologies: ["Flutter", "Dart", "TypeScript backend", "MongoDB", "SQL"],
+    github: "https://github.com/robsen123-fexil/ai-health-assistant-app",
+  },
+]
+
+const education = [
+  {
+    title: "B.Sc. Software Engineering",
+    org: "Adama Science and Technology University",
+    period: "2026",
+  },
+  {
+    title: "A2SV Software Engineering Program",
+    org: "African To Silicon Valley",
+    period: "1 year, 2025–2026",
+    detail:
+      "Problem solving, DSA, LeetCode, and competitive programming, then a mobile app development phase using Clean Architecture.",
+  },
+  {
+    title: "ALX Software Engineering",
+    org: "ALX Africa",
+    period: "2023–2024",
+    detail: "https://savanna.alxafrica.com/certificates/FzJNsmTyHZ",
+  },
+]
+
+const achievements = [
+  "A2SV G6 Project Phase, 1st Place: quality code and good teamwork (led the mobile team on ShopAlly).",
+  "Upwork Top Rated badge, 100% Job Success Score, worldwide clients.",
+  "Hackathon, 1st Place: Android app giving students resources, course outlines, and campus navigation tools.",
+]
 
 export default function Portfolio() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -41,1037 +209,367 @@ export default function Portfolio() {
   }, [])
 
   const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId)
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" })
-    }
+    document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth" })
     setIsMenuOpen(false)
   }
 
-  const skills = {
-    mobile: [
-      "Flutter",
-      "Dart",
-      "iOS Development",
-      "Android Development",
-      "Firebase",
-      "SQLite",
-      "REST APIs",
-      "State Management",
-      "UI/UX Design",
-      "Cross-platform",
-    ],
-    backend: [
-      "FastAPI",
-      "Python",
-      "Express.js",
-      "MongoDB",
-      "PostgreSQL",
-      "MySQL",
-      "REST APIs",
-  
-
-    ],
-    problemSolving: [
-      "Data Structures",
-      "Algorithms",
-      "Dynamic Programming",
-      "Graph Theory",
-      "Tree Algorithms",
-      "Sorting & Searching",
-      "Greedy Algorithms",
-      "Backtracking",
-      "System Design",
-    ],
-    tools: [
-      "Git",
-      "GitHub Actions",
-      "CI/CD",
-      "Figma",
-      "Postman",
-      "VS Code",
-     
-
-    ],
-  }
-
-  const projects = [
-    {
-      id: 1,
-      title: "AutoRent - Automated Rental Platform",
-      description:
-        "A Flutter app for managing vehicle rentals with automated booking, real-time availability, and payment integration.",
-      image: "/card.png?height=00&width=400",
-      technologies: ["Flutter", "Firebase"],
-      category: "Mobile App",
-      features: [
-        "Automated booking",
-        "Real-time availability",
-        "Payment integration",
-        "Admin dashboard",
-      ],
-      github: "https://github.com/robsen123-fexil/autorent.flutter",
-      demo: "https://www.figma.com/design/ir4WdEXpKMhYlNgL8zthOn/car-rental?node-id=0-1&t=ymoj9mk3Jxt5HFFh-0",
-    },
-
-    {
-      id: 2,
-      title: "AgriTech Mobile Suite",
-      description:
-        "Cross-platform mobile app for farmers with weather forecasting, crop monitoring disease Detection, and marketplace features.",
-      image: "/smartfarmer.png?height=300&width=400",
-      technologies: [
-        "Flutter Dev",
-        "FastAPI",
-        "PostgreSQL",
-
-        "ML Models",
-        "Provider",
-        "Python",
-      ],
-      category: "Mobile App",
-      features: [
-        "Weather predictions",
-        "Crop disease detection",
-        "Marketplace",
-      ],
-      github: "https://github.com/username/agritech",
-      Design:
-        "https://www.figma.com/design/asGgwQjBguFHDOIKDlpFUJ/Crop-Disease?node-id=98-5&t=ZZzuZ7C1bRC1EUy0-0",
-    },
-    {
-      id: 3,
-      title: "Fluent AI",
-      description:
-        "AI-powered language learning platform with scalable backend services for real-time chat, speech recognition, and personalized lesson delivery.",
-      image: "/fluenta.png?height=300&width=400",
-      technologies: ["Flutter", "Python", "Firebase auth", "AI models"],
-      category: "Backend",
-      features: [
-        "Real-time chat",
-        "Speech recognition",
-        "Personalized lessons",
-        "Scalable microservices",
-      ],
-      github: "https://github.com/robsen123-fexil/FluentAI-",
-      demo: "https://www.figma.com/design/k5Jsrb7aTMqjZcpvAYYxzB/Fluent-ai?node-id=0-1&p=f&t=IZ3hxJh1qLS683A4-0",
-    },
-
-    {
-      id: 4,
-      title: "CraveChronicles Social App",
-      description:
-        "A full-stack social media platform where users can share posts, follow friends, and engage through real-time chat and media sharing.",
-      image: "/crave.png?height=300&width=400",
-      technologies: [
-        "Flutter",
-        "Firebase auth",
-        "DB",
-        
-        "Socket.IO",
-      
-      ],
-      category: "Full Stack",
-      features: [
-        "Real-time chat",
-        "Media sharing",
-        "User profiles",
-        "News feed",
-      ],
-      github: "https://github.com/robsen123-fexil/cravechronicles",
-    },
-   
-    {
-      id: 6,
-      title: "AI Health Assistance ",
-      description:
-        "AI-powered health monitoring app with wearable integration, symptom tracking, and telemedicine features.",
-      image: "/health.png?height=300&width=400",
-      technologies: ["Flutter", "Mongodb", "Express.js", "Cloud Functions"],
-      category: "Mobile App",
-      features: [
-        "AI health insights",
-        "Wearable sync",
-        "Telemedicine",
-        "Emergency alerts",
-      ],
-      github: "https://github.com/robsen123-fexil/ai-health-assistant-app",
-      demo: "https://www.figma.com/design/r3IT8j6iVCH6FCx2KOw9aE/ai-based-health-assistance?node-id=0-1&p=f&t=V7OKKdw8oaDxXj85-0",
-    },
-  ];
-
-  const leetcodeStats = {
-    totalSolved: 500,
-    easy: 227,
-    medium: 280,
-    hard: 10,
-    ranking: "Top 15%",
-
-    
-    rating: 1370,
-  }
-
-  const a2svAchievements = [
-    {
-      title: "Backend Development ",
-      description:
-        "Collaborated with a team to design and develop scalable backend services with A2SV Team, ensuring high performance, reliability, and smooth integration with frontend applications.",
-      duration: "july 2025 - Present",
-    },
-    {
-      title: "Mobile Development @ Mint",
-      description:
-        "Developed a cross-platform mobile application using Flutter in collaboration with a development team for the Ministry of Innovation and Technology.",
-      duration: "Sep 2023 - Jan 2024",
-    },
-  ];
-
-  const [selectedCategory, setSelectedCategory] = useState("All")
-  const categories = ["All", "Mobile App", "Backend", "Full Stack",]
-
-  const filteredProjects =
-    selectedCategory === "All" ? projects : projects.filter((project) => project.category === selectedCategory)
-
   if (!mounted) {
-    return null
+    return <div className="min-h-screen bg-background" />
   }
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      {/* Navigation */}
-      <nav className="fixed top-0 w-full bg-background/80 backdrop-blur-md border-b z-50">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex justify-between items-center">
-            <div className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+      <nav className="fixed top-0 z-50 w-full border-b bg-background/80 backdrop-blur-md">
+        <div className="container mx-auto px-4 py-3">
+          <div className="flex items-center justify-between">
+            <button
+              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+              className="text-lg font-semibold tracking-tight focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-sm"
+            >
               Robsen Teshome
-            </div>
-
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center space-x-8">
-              <button
-                onClick={() => scrollToSection("about")}
-                className="hover:text-primary transition-colors"
-              >
-                About
-              </button>
-              <button
-                onClick={() => scrollToSection("skills")}
-                className="hover:text-primary transition-colors"
-              >
-                Skills
-              </button>
-              <button
-                onClick={() => scrollToSection("projects")}
-                className="hover:text-primary transition-colors"
-              >
-                Projects
-              </button>
-              <button
-                onClick={() => scrollToSection("problem-solving")}
-                className="hover:text-primary transition-colors"
-              >
-                Problem Solving
-              </button>
-              <button
-                onClick={() => scrollToSection("contact")}
-                className="hover:text-primary transition-colors"
-              >
-                Contact
-              </button>
+            </button>
+            <div className="hidden items-center gap-5 lg:flex">
+              {navItems.map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => scrollToSection(item.id)}
+                  className="text-sm text-muted-foreground hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-sm"
+                >
+                  {item.label}
+                </button>
+              ))}
               <Button
                 variant="ghost"
                 size="icon"
+                aria-label="Toggle color theme"
                 onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
               >
-                {theme === "dark" ? (
-                  <Sun className="h-5 w-5" />
-                ) : (
-                  <Moon className="h-5 w-5" />
-                )}
+                {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
               </Button>
             </div>
-
-            {/* Mobile Navigation */}
-            <div className="md:hidden flex items-center space-x-2">
+            <div className="flex items-center gap-1 lg:hidden">
               <Button
                 variant="ghost"
                 size="icon"
+                aria-label="Toggle color theme"
                 onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
               >
-                {theme === "dark" ? (
-                  <Sun className="h-5 w-5" />
-                ) : (
-                  <Moon className="h-5 w-5" />
-                )}
+                {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
               </Button>
               <Button
                 variant="ghost"
                 size="icon"
+                aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+                aria-expanded={isMenuOpen}
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
               >
-                {isMenuOpen ? (
-                  <X className="h-5 w-5" />
-                ) : (
-                  <Menu className="h-5 w-5" />
-                )}
+                {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
               </Button>
             </div>
           </div>
-
-          {/* Mobile Menu */}
           {isMenuOpen && (
-            <div className="md:hidden mt-4 pb-4 border-t">
-              <div className="flex flex-col space-y-4 pt-4">
+            <div className="flex flex-col gap-3 border-t py-4 lg:hidden">
+              {navItems.map((item) => (
                 <button
-                  onClick={() => scrollToSection("about")}
-                  className="text-left hover:text-primary transition-colors"
+                  key={item.id}
+                  onClick={() => scrollToSection(item.id)}
+                  className="text-left text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-sm"
                 >
-                  About
+                  {item.label}
                 </button>
-                <button
-                  onClick={() => scrollToSection("skills")}
-                  className="text-left hover:text-primary transition-colors"
-                >
-                  Skills
-                </button>
-                <button
-                  onClick={() => scrollToSection("projects")}
-                  className="text-left hover:text-primary transition-colors"
-                >
-                  Projects
-                </button>
-                <button
-                  onClick={() => scrollToSection("problem-solving")}
-                  className="text-left hover:text-primary transition-colors"
-                >
-                  Problem Solving
-                </button>
-                <button
-                  onClick={() => scrollToSection("contact")}
-                  className="text-left hover:text-primary transition-colors"
-                >
-                  Contact
-                </button>
-              </div>
+              ))}
             </div>
           )}
         </div>
       </nav>
 
-      {/* Hero Section */}
-      <section className="pt-24 pb-16 px-4">
-        <div className="container mx-auto text-center">
-          <div className="mb-8">
-            {/* <img
-              src="/profile.jpg?height=10000&width=10000"
-              alt="Robsen Teshome"
-              className="w-80 h-80 rounded-full mx-auto mb-6 border-4 border-primary/20"
-            /> */}
-            <h1 className="text-4xl md:text-6xl font-bold mb-4">
-              Mobile Developer
-            </h1>
-            <p className="text-xl md:text-2xl text-muted-foreground mb-4 max-w-3xl mx-auto">
-              Building exceptional mobile experiences with Flutter, powered by
-              robust backend solutions and strong problem-solving skills
-            </p>
-            <div className="flex flex-wrap justify-center gap-2 mb-8">
-              <Badge variant="secondary" className="text-sm">
-                <Trophy className="mr-1 h-3 w-3" />
-                A2SV Trainee
-              </Badge>
-
-              <Badge variant="secondary" className="text-sm">
-                <Code className="mr-1 h-3 w-3" />
-                500+ Problems Solved
-              </Badge>
-            </div>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-  <button
-    onClick={() => scrollToSection("projects")}
-    className="px-4 py-2 bg-blue-600 text-white rounded"
-  >
-    View My Work
-  </button>
-
-  <a
-    href="https://flowcv.com/resume/gp1l2eafqi"
-    target="_blank"
-    rel="noopener noreferrer"
-  >
-    <button className="px-4 py-2 bg-blue-600 text-white rounded">
-      View Resume
-    </button>
-  </a>
-
-  <a href="/Robsen(Flutter).pdf" download>
-    <button className="px-4 py-2 bg-blue-600 text-white rounded">
-      Download Resume
-    </button>
-  </a>
-</div>
-
+      <header className="px-4 pb-16 pt-28">
+        <div className="container mx-auto max-w-3xl text-center">
+          <p className="mb-3 text-sm font-medium uppercase tracking-wide text-muted-foreground">
+            Robsen Teshome
+          </p>
+          <h1 className="text-3xl font-semibold leading-tight sm:text-5xl">
+            Mobile App Developer
+          </h1>
+          <p className="mt-3 text-lg text-muted-foreground">
+            Flutter &amp; Mobile Application Development
+          </p>
+          <p className="mt-2 flex items-center justify-center gap-2 text-sm text-muted-foreground">
+            <MapPin className="h-4 w-4" aria-hidden />
+            Addis Ababa, Ethiopia · +251 940 046 254 · open to onsite or remote, prefers flexible remote
+          </p>
+          <div className="mt-6 inline-flex items-center gap-2 rounded-full border bg-secondary px-4 py-2 text-sm font-medium">
+            <Trophy className="h-4 w-4 text-primary" aria-hidden />
+            Upwork Top Rated, 100% JSS
           </div>
-
-          <div className="flex justify-center space-x-6 text-muted-foreground">
+          <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground">
+            Mobile App Developer with 3+ years of experience building production Flutter applications.
+            Upwork Top Rated freelancer with a 100% Job Success Score, working with clients worldwide.
+            Strong foundation in Flutter, Dart, REST APIs, Python (FastAPI, Django), cloud backend
+            services, and Supabase, with hands-on experience in regression testing, UI and cross-device
+            Android compatibility testing, API validation, and defect reporting.
+          </p>
+          <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <Button onClick={() => scrollToSection("projects")}>View projects</Button>
+            <Button variant="outline" asChild>
+              <a href="/Robsen_Teshome_Mobile_Dev.pdf" download>
+                <Download className="mr-2 h-4 w-4" />
+                Download Resume
+              </a>
+            </Button>
+          </div>
+          <div className="mt-8 flex justify-center gap-5">
             <a
               href="https://github.com/robsen123-fexil"
-              className="hover:text-primary transition-colors"
+              aria-label="GitHub"
+              className="text-muted-foreground hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-sm"
             >
-              <Github className="h-6 w-6" />
+              <Github className="h-5 w-5" />
             </a>
             <a
-              href="https://www.linkedin.com/in/robsen-teshome-889926254/"
-              className="hover:text-primary transition-colors"
+              href="https://linkedin.com/in/robsen-teshoma-4b129b281"
+              aria-label="LinkedIn"
+              className="text-muted-foreground hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-sm"
             >
-              <Linkedin className="h-6 w-6" />
+              <Linkedin className="h-5 w-5" />
             </a>
             <a
-              href="mailto:robsenteshoma1@example.com"
-              className="hover:text-primary transition-colors"
+              href="https://leetcode.com/u/Robsen/"
+              aria-label="LeetCode"
+              className="text-muted-foreground hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-sm"
             >
-              <Mail className="h-6 w-6" />
+              <Code className="h-5 w-5" />
+            </a>
+            <a
+              href="mailto:robsenteshoma1@gmail.com"
+              aria-label="Email"
+              className="text-muted-foreground hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-sm"
+            >
+              <Mail className="h-5 w-5" />
             </a>
           </div>
         </div>
-      </section>
+      </header>
 
-      {/* About Section */}
-      <section id="about" className="py-16 px-4 bg-muted/30">
-        <div className="container mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
-            About Me
-          </h2>
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div>
-              <p className="text-lg mb-6 leading-relaxed">
-                I'm a passionate Full-Stack Mobile Developer with expertise in
-                Flutter and backend technologies. Currently a trainee at A2SV
-                (Africa to Silicon Valley), where I'm honing my skills in
-                competitive programming and software engineering best practices.
-              </p>
-              <p className="text-lg mb-6 leading-relaxed">
-                My journey combines mobile app development with strong backend
-                engineering and algorithmic problem-solving. I believe in
-                creating scalable, user-centric solutions that make a real
-                impact. My experience spans from building cross-platform mobile
-                apps to designing robust backend architectures.
-              </p>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-                <div>
-                  <div className="text-2xl font-bold text-primary">10+</div>
-                  <div className="text-sm text-muted-foreground">
-                    Apps Built
-                  </div>
-                </div>
-                <div>
-                  <div className="text-2xl font-bold text-primary">500+</div>
-                  <div className="text-sm text-muted-foreground">
-                    Problems Solved
-                  </div>
-                </div>
-                <div>
-                  <div className="text-2xl font-bold text-primary">3+</div>
-                  <div className="text-sm text-muted-foreground">
-                    Years Experience
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="space-y-6">
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center">
-                    <Smartphone className="mr-2 h-5 w-5 text-primary" />
-                    Mobile Development
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p>
-                    Specialized in Flutter Development, with focus on
-                    performance, user experience, and cross-platform
-                    compatibility.
-                  </p>
-                </CardContent>
-              </Card>
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center">
-                    <Server className="mr-2 h-5 w-5 text-primary" />
-                    Backend Development
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p>
-                    Building scalable APIs and backend services using Go,
-                    FastAPI, and cloud technologies with microservices
-                    architecture.
-                  </p>
-                </CardContent>
-              </Card>
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center">
-                    <Brain className="mr-2 h-5 w-5 text-primary" />
-                    Problem Solving
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p>
-                    Strong algorithmic thinking with 500+ LeetCode problems
-                    solved and active participation in competitive programming.
-                  </p>
-                </CardContent>
-              </Card>
+      <main>
+        <section id="about" className="bg-muted/40 px-4 py-16">
+          <div className="container mx-auto max-w-3xl">
+            <h2 className="text-2xl font-semibold sm:text-3xl">About</h2>
+            <p className="mt-4 leading-relaxed text-muted-foreground">
+              I look for clear roles with an individual-contributor track, room to grow as a mobile
+              engineer, challenging mobile product problems, and a quiet, product-focused team.
+              Preferred stack: Flutter, Dart, Python, FastAPI, Django, Supabase, REST APIs, and Clean
+              Architecture.
+            </p>
+          </div>
+        </section>
+
+        <section id="skills" className="px-4 py-16">
+          <div className="container mx-auto">
+            <h2 className="text-2xl font-semibold sm:text-3xl">Skills</h2>
+            <div className="mt-8 grid gap-4 md:grid-cols-2">
+              {skillGroups.map((group) => (
+                <Card key={group.title}>
+                  <CardHeader>
+                    <CardTitle className="flex items-center text-base">
+                      <group.icon className="mr-2 h-4 w-4 text-primary" aria-hidden />
+                      {group.title}
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="flex flex-wrap gap-2">
+                      {group.items.map((item) => (
+                        <Badge key={item} variant="secondary">
+                          {item}
+                        </Badge>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Skills Section */}
-      <section id="skills" className="py-16 px-4">
-        <div className="container mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
-            Skills & Technologies
-          </h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center">
-                  <Smartphone className="mr-2 h-5 w-5 text-primary" />
-                  Mobile Development
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="flex flex-wrap gap-2">
-                  {skills.mobile.map((skill) => (
-                    <Badge key={skill} variant="secondary">
-                      {skill}
-                    </Badge>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center">
-                  <Server className="mr-2 h-5 w-5 text-primary" />
-                  Backend Development
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="flex flex-wrap gap-2">
-                  {skills.backend.map((skill) => (
-                    <Badge key={skill} variant="secondary">
-                      {skill}
-                    </Badge>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center">
-                  <Brain className="mr-2 h-5 w-5 text-primary" />
-                  Problem Solving
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="flex flex-wrap gap-2">
-                  {skills.problemSolving.map((skill) => (
-                    <Badge key={skill} variant="secondary">
-                      {skill}
-                    </Badge>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center">
-                  <Code className="mr-2 h-5 w-5 text-primary" />
-                  Tools & Others
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="flex flex-wrap gap-2">
-                  {skills.tools.map((skill) => (
-                    <Badge key={skill} variant="secondary">
-                      {skill}
-                    </Badge>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
+        <section id="experience" className="bg-muted/40 px-4 py-16">
+          <div className="container mx-auto max-w-3xl">
+            <h2 className="text-2xl font-semibold sm:text-3xl">Experience</h2>
+            <div className="mt-8 space-y-6">
+              {experience.map((job) => (
+                <Card key={job.role}>
+                  <CardHeader>
+                    <CardTitle className="flex items-start gap-2 text-lg">
+                      <Briefcase className="mt-1 h-4 w-4 shrink-0 text-primary" aria-hidden />
+                      {job.role}
+                    </CardTitle>
+                    <CardDescription>
+                      {job.org} · {job.place} · {job.period}
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <ul className="list-disc space-y-2 pl-5 text-sm leading-relaxed text-muted-foreground">
+                      {job.points.map((point) => (
+                        <li key={point}>{point}</li>
+                      ))}
+                    </ul>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Projects Section */}
-      <section id="projects" className="py-16 px-4 bg-muted/30">
-        <div className="container mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
-            Featured Projects
-          </h2>
-
-          {/* Category Filter */}
-          <div className="flex flex-wrap justify-center gap-2 mb-8">
-            {categories.map((category) => (
-              <Button
-                key={category}
-                variant={selectedCategory === category ? "default" : "outline"}
-                onClick={() => setSelectedCategory(category)}
-                className="mb-2"
-              >
-                {category}
-              </Button>
-            ))}
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredProjects.map((project) => (
-              <Card
-                key={project.id}
-                className="overflow-hidden hover:shadow-lg transition-shadow"
-              >
-                <div className="aspect-video overflow-hidden">
-                  <img
-                    src={project.image || "/placeholder.svg"}
-                    alt={project.title}
-                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                  />
-                </div>
-                <CardHeader>
-                  <div className="flex justify-between items-start">
+        <section id="projects" className="px-4 py-16">
+          <div className="container mx-auto">
+            <h2 className="text-2xl font-semibold sm:text-3xl">Projects</h2>
+            <div className="mt-8 grid gap-6 md:grid-cols-2">
+              {projects.map((project) => (
+                <Card key={project.title} className="overflow-hidden">
+                  {project.image ? (
+                    <div className="relative aspect-[4/3] bg-muted">
+                      <Image
+                        src={project.image}
+                        alt={project.alt ?? project.title}
+                        fill
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                        className="object-cover"
+                      />
+                    </div>
+                  ) : (
+                    <div className="flex aspect-[4/3] items-center justify-center bg-muted px-6 text-center text-sm text-muted-foreground">
+                      Screenshot not added yet
+                    </div>
+                  )}
+                  <CardHeader>
                     <CardTitle className="text-xl">{project.title}</CardTitle>
-                    <Badge variant="outline">{project.category}</Badge>
-                  </div>
-                  <CardDescription>{project.description}</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-4">
-                    <div>
-                      <h4 className="font-semibold mb-2">Technologies:</h4>
-                      <div className="flex flex-wrap gap-1">
-                        {project.technologies.map((tech) => (
-                          <Badge
-                            key={tech}
-                            variant="secondary"
-                            className="text-xs"
-                          >
-                            {tech}
-                          </Badge>
-                        ))}
-                      </div>
+                    <CardDescription className="text-xs font-medium uppercase tracking-wide">
+                      {project.client}
+                    </CardDescription>
+                    <p className="pt-2 text-sm leading-relaxed text-muted-foreground">{project.description}</p>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <div className="flex flex-wrap gap-2">
+                      {project.technologies.map((tech) => (
+                        <Badge key={tech} variant="secondary">
+                          {tech}
+                        </Badge>
+                      ))}
                     </div>
-                    <div>
-                      <h4 className="font-semibold mb-2">Key Features:</h4>
-                      <ul className="text-sm text-muted-foreground space-y-1">
-                        {project.features.map((feature, index) => (
-                          <li key={index}>• {feature}</li>
-                        ))}
-                      </ul>
-                    </div>
-                    <div className="bg-muted/50 p-3 rounded-lg"></div>
-                    <div className="flex gap-2 pt-2">
+                    {project.github && (
                       <Button size="sm" variant="outline" asChild>
-                        <a
-                          href={project.github}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          <Github className="mr-1 h-3 w-3" />
-                          Code
+                        <a href={project.github} target="_blank" rel="noopener noreferrer">
+                          <Github className="mr-2 h-4 w-4" />
+                          GitHub
                         </a>
                       </Button>
-                      <Button size="sm" asChild>
-                        <a
-                          href={project.demo}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          <ExternalLink className="mr-1 h-3 w-3" />
-                          Design
-                        </a>
-                      </Button>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Problem Solving Section */}
-      <section id="problem-solving" className="py-16 px-4">
-        <div className="container mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
-            Problem Solving & Achievements
-          </h2>
-
-          <div className="grid lg:grid-cols-2 gap-12">
-            {/* LeetCode Stats */}
-            <div>
-              <h3 className="text-2xl font-semibold mb-6 flex items-center">
-                <Code className="mr-2 h-6 w-6 text-primary" />
-                LeetCode Statistics
-              </h3>
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center justify-between">
-                    <span>Coding Progress</span>
-                    <Badge variant="secondary">{leetcodeStats.ranking}</Badge>
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-6">
-                  <div className="grid grid-cols-2 gap-4 text-center">
-                    <div>
-                      <div className="text-3xl font-bold text-primary">
-                        {leetcodeStats.totalSolved}
-                      </div>
-                      <div className="text-sm text-muted-foreground">
-                        Total Solved
-                      </div>
-                    </div>
-                    <div>
-                      <div className="text-3xl font-bold text-primary">
-                        {leetcodeStats.rating}
-                      </div>
-                      <div className="text-sm text-muted-foreground">
-                        Contest Rating
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="space-y-4">
-                    <div>
-                      <div className="flex justify-between mb-2">
-                        <span className="text-sm">Easy Problems</span>
-                        <span className="text-sm text-green-600">
-                          {leetcodeStats.easy}
-                        </span>
-                      </div>
-                      <Progress
-                        value={(leetcodeStats.easy / 300) * 100}
-                        className="h-2"
-                      />
-                    </div>
-                    <div>
-                      <div className="flex justify-between mb-2">
-                        <span className="text-sm">Medium Problems</span>
-                        <span className="text-sm text-yellow-600">
-                          {leetcodeStats.medium}
-                        </span>
-                      </div>
-                      <Progress
-                        value={(leetcodeStats.medium / 400) * 100}
-                        className="h-2"
-                      />
-                    </div>
-                    <div>
-                      <div className="flex justify-between mb-2">
-                        <span className="text-sm">Hard Problems</span>
-                        <span className="text-sm text-red-600">
-                          {leetcodeStats.hard}
-                        </span>
-                      </div>
-                      <Progress
-                        value={(leetcodeStats.hard / 200) * 100}
-                        className="h-2"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-2 gap-4 pt-4 border-t"></div>
-                </CardContent>
-              </Card>
+                    )}
+                  </CardContent>
+                </Card>
+              ))}
             </div>
+          </div>
+        </section>
 
-            {/* A2SV Experience */}
-            <div>
-              <h3 className="text-2xl font-semibold mb-6 flex items-center">
-                <Award className="mr-2 h-6 w-6 text-primary" />
-                Development Experience
-              </h3>
-              <div className="space-y-6">
-                {a2svAchievements.map((achievement, index) => (
-                  <Card key={index}>
-                    <CardHeader>
-                      <CardTitle className="text-lg">
-                        {achievement.title}
-                      </CardTitle>
-                      <CardDescription className="flex items-center">
-                        <Calendar className="mr-1 h-4 w-4" />
-                        {achievement.duration}
-                      </CardDescription>
-                    </CardHeader>
+        <section id="education" className="bg-muted/40 px-4 py-16">
+          <div className="container mx-auto max-w-3xl">
+            <h2 className="text-2xl font-semibold sm:text-3xl">Education</h2>
+            <div className="mt-8 space-y-4">
+              {education.map((item) => (
+                <Card key={item.title}>
+                  <CardHeader>
+                    <CardTitle className="flex items-start gap-2 text-lg">
+                      <GraduationCap className="mt-1 h-4 w-4 shrink-0 text-primary" aria-hidden />
+                      {item.title}
+                    </CardTitle>
+                    <CardDescription>
+                      {item.org} · {item.period}
+                    </CardDescription>
+                  </CardHeader>
+                  {item.detail && (
                     <CardContent>
-                      <p className="mb-3">{achievement.description}</p>
-                      <div className="bg-primary/10 p-3 rounded-lg"></div>
+                      {item.detail.startsWith("http") ? (
+                        <a
+                          href={item.detail}
+                          className="text-sm text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-sm"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          ALX certificate
+                        </a>
+                      ) : (
+                        <p className="text-sm leading-relaxed text-muted-foreground">{item.detail}</p>
+                      )}
                     </CardContent>
-                  </Card>
-                ))}
-              </div>
+                  )}
+                </Card>
+              ))}
             </div>
           </div>
+        </section>
 
-          {/* Skills Highlight
-          <div className="mt-12">
-            <h3 className="text-2xl font-semibold mb-6 text-center">
-              Core Problem Solving Skills
-            </h3>
-            <div className="grid md:grid-cols-3 gap-6">
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center">
-                    <Cpu className="mr-2 h-5 w-5 text-primary" />
-                    Algorithms
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-muted-foreground mb-3">
-                    Expert in sorting, searching, graph algorithms, dynamic
-                    programming, and greedy approaches.
-                  </p>
-                  <div className="flex flex-wrap gap-1">
-                    <Badge variant="outline" className="text-xs">
-                      DP
-                    </Badge>
-                    <Badge variant="outline" className="text-xs">
-                      Graphs
-                    </Badge>
-                    <Badge variant="outline" className="text-xs">
-                      Trees
-                    </Badge>
-                    <Badge variant="outline" className="text-xs">
-                      Greedy
-                    </Badge>
-                  </div>
-                </CardContent>
-              </Card>
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center">
-                    <Database className="mr-2 h-5 w-5 text-primary" />
-                    Data Structures
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-muted-foreground mb-3">
-                    Proficient with arrays, linked lists, stacks, queues, trees,
-                    heaps, and hash tables.
-                  </p>
-                  <div className="flex flex-wrap gap-1">
-                    <Badge variant="outline" className="text-xs">
-                      Arrays
-                    </Badge>
-                    <Badge variant="outline" className="text-xs">
-                      Trees
-                    </Badge>
-                    <Badge variant="outline" className="text-xs">
-                      Heaps
-                    </Badge>
-                    <Badge variant="outline" className="text-xs">
-                      Hash Maps
-                    </Badge>
-                  </div>
-                </CardContent>
-              </Card>
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center">
-                    <Globe className="mr-2 h-5 w-5 text-primary" />
-                    System Design
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-muted-foreground mb-3">
-                    Understanding of scalable system architecture, database
-                    design, and distributed systems.
-                  </p>
-                  <div className="flex flex-wrap gap-1">
-                    <Badge variant="outline" className="text-xs">
-                      Scalability
-                    </Badge>
-                    <Badge variant="outline" className="text-xs">
-                      Microservices
-                    </Badge>
-                    <Badge variant="outline" className="text-xs">
-                      Caching
-                    </Badge>
-                    <Badge variant="outline" className="text-xs">
-                      Load Balancing
-                    </Badge>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-          </div> */}
-        </div>
-      </section>
-
-      {/* Contact Section */}
-      <section id="contact" className="py-16 px-4 bg-muted/30">
-        <div className="container mx-auto max-w-4xl">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
-            Get In Touch
-          </h2>
-          <div className="grid md:grid-cols-2 gap-12">
-            <div>
-              <h3 className="text-2xl font-semibold mb-6">
-                Let's Build Something Amazing
-              </h3>
-              <p className="text-lg mb-6 text-muted-foreground">
-                I'm always excited about new opportunities and challenging
-                projects. Whether you need a mobile app, backend solution, or
-                help with algorithmic problems, let's discuss how we can work
-                together to create innovative solutions.
-              </p>
-              <div className="space-y-4">
-                <div className="flex items-center">
-                  <Mail className="mr-3 h-5 w-5 text-primary" />
-                  <a
-                    href="mailto:robsenteshoma1@gmail.com"
-                    className="text-primary hover:underline"
-                  >
-                    robsenteshoma1@gmail.com
-                  </a>
-                </div>
-                <div className="flex items-center">
-                  <Github className="mr-3 h-5 w-5 text-primary" />
-                  <a
-                    href="https://github.com/robsen123-fexil"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-primary hover:underline"
-                  >
-                    https://github.com/robsen123-fexil
-                  </a>
-                </div>
-                <div className="flex items-center">
-                  <Linkedin className="mr-3 h-5 w-5 text-primary" />
-                  <a
-                    href="https://www.linkedin.com/in/robsen-teshome-889926254/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-primary hover:underline"
-                  >
-                    https://www.linkedin.com/in/robsen-teshome-889926254/
-                  </a>
-                </div>
-
-                <div className="flex items-center">
-                  <Code className="mr-3 h-5 w-5 text-primary" />
-                  <a
-                    href="https://leetcode.com/u/robsen/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-primary hover:underline"
-                  >
-                    https://leetcode.com/u/robsen/
-                  </a>
-                </div>
-              </div>
-
-              <div className="mt-8 p-4 bg-primary/10 rounded-lg">
-                <h4 className="font-semibold mb-2 flex items-center">
-                  <Trophy className="mr-2 h-4 w-4" />
-                  Currently Available For
-                </h4>
-                <ul className="text-sm space-y-1">
-                  <li>• Mobile App Development Projects</li>
-                  <li>• Backend API Development</li>
-                  <li>• Technical Mentoring & Code Reviews</li>
-                </ul>
-              </div>
-            </div>
-            <Card>
-              <CardHeader>
-                <CardTitle>Send a Message</CardTitle>
-                <CardDescription>
-                  Fill out the form below and I'll get back to you as soon as
-                  possible.
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <form className="space-y-4">
-                  <div className="grid grid-cols-2 gap-4">
-                    <div>
-                      <label
-                        htmlFor="firstName"
-                        className="block text-sm font-medium mb-2"
-                      >
-                        First Name
-                      </label>
-                      <Input id="firstName" placeholder="John" />
-                    </div>
-                    <div>
-                      <label
-                        htmlFor="lastName"
-                        className="block text-sm font-medium mb-2"
-                      >
-                        Last Name
-                      </label>
-                      <Input id="lastName" placeholder="Doe" />
-                    </div>
-                  </div>
-                  <div>
-                    <label
-                      htmlFor="email"
-                      className="block text-sm font-medium mb-2"
-                    >
-                      Email
-                    </label>
-                    <Input
-                      id="email"
-                      type="email"
-                      placeholder="john@example.com"
-                    />
-                  </div>
-                  <div>
-                    <label
-                      htmlFor="projectType"
-                      className="block text-sm font-medium mb-2"
-                    >
-                      Project Type
-                    </label>
-                    <Input
-                      id="projectType"
-                      placeholder="Mobile App, Backend API, Consultation, etc."
-                    />
-                  </div>
-                  <div>
-                    <label
-                      htmlFor="message"
-                      className="block text-sm font-medium mb-2"
-                    >
-                      Message
-                    </label>
-                    <Textarea
-                      id="message"
-                      placeholder="Tell me about your project or how I can help..."
-                      rows={4}
-                    />
-                  </div>
-                  <Button type="submit" className="w-full">
-                    Send Message
-                  </Button>
-                </form>
-              </CardContent>
-            </Card>
+        <section id="achievements" className="px-4 py-16">
+          <div className="container mx-auto max-w-3xl">
+            <h2 className="text-2xl font-semibold sm:text-3xl">Achievements</h2>
+            <ul className="mt-8 space-y-3">
+              {achievements.map((item) => (
+                <li key={item} className="flex gap-3 rounded-lg border bg-card p-4 text-sm leading-relaxed">
+                  <Trophy className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Footer */}
-      <footer className="py-8 px-4 border-t">
-        <div className="container mx-auto text-center">
-          <p className="text-muted-foreground">
-            © 2024 Robsen Teshome. Built with Next.js and Tailwind CSS.
-            <span className="ml-2">🚀 From Africa to Silicon Valley</span>
-          </p>
-        </div>
+        <section id="contact" className="bg-muted/40 px-4 py-16">
+          <div className="container mx-auto max-w-3xl">
+            <h2 className="text-2xl font-semibold sm:text-3xl">Contact</h2>
+            <p className="mt-4 text-muted-foreground">
+              Addis Ababa, Ethiopia. Open to onsite or remote work, and prefer flexible remote.
+            </p>
+            <ul className="mt-6 space-y-3 text-sm">
+              <li>
+                <a className="inline-flex items-center gap-2 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-sm" href="mailto:robsenteshoma1@gmail.com">
+                  <Mail className="h-4 w-4 text-primary" aria-hidden />
+                  robsenteshoma1@gmail.com
+                </a>
+              </li>
+              <li>
+                <a className="inline-flex items-center gap-2 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-sm" href="tel:+251940046254">
+                  +251 940 046 254
+                </a>
+              </li>
+              <li>
+                <a className="inline-flex items-center gap-2 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-sm" href="https://linkedin.com/in/robsen-teshoma-4b129b281" target="_blank" rel="noopener noreferrer">
+                  <Linkedin className="h-4 w-4 text-primary" aria-hidden />
+                  LinkedIn
+                </a>
+              </li>
+              <li>
+                <a className="inline-flex items-center gap-2 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-sm" href="https://github.com/robsen123-fexil" target="_blank" rel="noopener noreferrer">
+                  <Github className="h-4 w-4 text-primary" aria-hidden />
+                  GitHub
+                </a>
+              </li>
+              <li>
+                <a className="inline-flex items-center gap-2 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-sm" href="https://leetcode.com/u/Robsen/" target="_blank" rel="noopener noreferrer">
+                  <Code className="h-4 w-4 text-primary" aria-hidden />
+                  LeetCode
+                </a>
+              </li>
+              <li>
+                <a className="inline-flex items-center gap-2 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-sm" href="https://robsenteshome.vercel.app/">
+                  Portfolio
+                </a>
+              </li>
+            </ul>
+          </div>
+        </section>
+      </main>
+
+      <footer className="border-t px-4 py-8 text-center text-sm text-muted-foreground">
+        © {new Date().getFullYear()} Robsen Teshome
       </footer>
     </div>
-  );
+  )
 }
