@@ -46,7 +46,7 @@ const skillGroups = [
   {
     title: "Mobile",
     icon: Smartphone,
-    items: ["Flutter", "Dart", "MVVM", "Clean Architecture"],
+    items: ["Flutter", "Dart", "Clean Architecture", "MVVM"],
   },
   {
     title: "Backend / Fullstack",
@@ -56,7 +56,7 @@ const skillGroups = [
   {
     title: "Databases & Cloud Data Services",
     icon: Server,
-    items: ["Cloud NoSQL Database", "Supabase", "PostgreSQL", "MongoDB", "SQL"],
+    items: ["Supabase", "PostgreSQL", "Cloud NoSQL Database", "MongoDB", "SQL"],
   },
   {
     title: "Tools",
@@ -156,6 +156,28 @@ const projects: Project[] = [
       "/projects/shopally/12.webp",
     ],
     alt: "ShopAlly welcome screen with yellow logo and AI shopping tagline",
+  },
+  {
+    id: "betlink",
+    title: "Betlink",
+    client: "Mobile property marketplace",
+    clientChip: "Mobile property marketplace",
+    role: "Mobile developer",
+    description:
+      "Property marketplace for buyers and sellers, with regression-tested search, filtering, and messaging across Android devices.",
+    technologies: ["Flutter", "Dart"],
+    category: "team",
+    device: "phone",
+    cover: "/projects/betlink/01.webp",
+    images: [
+      "/projects/betlink/01.webp",
+      "/projects/betlink/02.webp",
+      "/projects/betlink/03.webp",
+      "/projects/betlink/04.webp",
+      "/projects/betlink/05.webp",
+      "/projects/betlink/06.webp",
+    ],
+    alt: "Betlink welcome screen with login and register",
   },
   {
     id: "imerzn",
@@ -258,28 +280,6 @@ const projects: Project[] = [
     alt: "AutoRent car rental screens showing vehicle search, details, and booking",
   },
   {
-    id: "betlink",
-    title: "Betlink",
-    client: "Mobile property marketplace",
-    clientChip: "Mobile property marketplace",
-    role: "Mobile developer",
-    description:
-      "Property marketplace for buyers and sellers, with regression-tested search, filtering, and messaging across Android devices.",
-    technologies: ["Flutter", "Dart"],
-    category: "other",
-    device: "phone",
-    cover: "/projects/betlink/01.webp",
-    images: [
-      "/projects/betlink/01.webp",
-      "/projects/betlink/02.webp",
-      "/projects/betlink/03.webp",
-      "/projects/betlink/04.webp",
-      "/projects/betlink/05.webp",
-      "/projects/betlink/06.webp",
-    ],
-    alt: "Betlink welcome screen with login and register",
-  },
-  {
     id: "ai-health",
     title: "AI Health Assistant",
     client: "Multilingual AI health app",
@@ -373,7 +373,8 @@ export default function Portfolio() {
   const [activeProject, setActiveProject] = useState<Project | null>(null)
   const galleryRef = useRef<HTMLDivElement>(null)
   const filterLabelId = useId()
-  const { theme, setTheme } = useTheme()
+  const { resolvedTheme, setTheme } = useTheme()
+  const isDark = resolvedTheme === "dark"
 
   useEffect(() => {
     setMounted(true)
@@ -432,9 +433,9 @@ export default function Portfolio() {
                 variant="ghost"
                 size="icon"
                 aria-label="Toggle color theme"
-                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                onClick={() => setTheme(isDark ? "light" : "dark")}
               >
-                {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+                {isDark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
               </Button>
             </div>
             <div className="flex items-center gap-1 lg:hidden">
@@ -442,9 +443,9 @@ export default function Portfolio() {
                 variant="ghost"
                 size="icon"
                 aria-label="Toggle color theme"
-                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                onClick={() => setTheme(isDark ? "light" : "dark")}
               >
-                {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+                {isDark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
               </Button>
               <Button
                 variant="ghost"
