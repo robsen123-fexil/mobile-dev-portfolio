@@ -62,23 +62,217 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Custom animations */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* Device mockups */
+.device-frame {
+  position: relative;
+  margin-inline: auto;
+  background: linear-gradient(160deg, hsl(220 15% 18%), hsl(220 18% 8%));
+  box-shadow:
+    0 18px 40px -20px hsl(222 47% 11% / 0.55),
+    inset 0 0 0 1px hsl(0 0% 100% / 0.08);
 }
 
-.animate-fade-in-up {
-  animation: fadeInUp 0.6s ease-out;
+.device-frame--phone {
+  width: 11.5rem;
+  max-width: 100%;
+  aspect-ratio: 9 / 19.5;
+  border-radius: 1.55rem;
+  padding: 0.42rem;
 }
 
-/* Progress bar custom styling */
-.progress-bar {
-  transition: width 0.3s ease-in-out;
+.device-frame--tablet {
+  width: 20rem;
+  max-width: 100%;
+  aspect-ratio: 16 / 10;
+  border-radius: 1.1rem;
+  padding: 0.55rem;
+}
+
+.device-frame__bezel {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+}
+
+.device-frame--phone .device-frame__speaker {
+  position: absolute;
+  top: 0.55rem;
+  left: 50%;
+  width: 28%;
+  height: 0.28rem;
+  transform: translateX(-50%);
+  border-radius: 999px;
+  background: hsl(220 14% 12%);
+  box-shadow: inset 0 0 0 1px hsl(0 0% 100% / 0.05);
+}
+
+.device-frame--phone .device-frame__camera {
+  position: absolute;
+  top: 0.48rem;
+  left: calc(50% + 18%);
+  width: 0.38rem;
+  height: 0.38rem;
+  border-radius: 999px;
+  background: radial-gradient(circle at 35% 35%, hsl(210 40% 55%), hsl(220 30% 18%) 60%, hsl(220 20% 8%));
+}
+
+.device-frame--tablet .device-frame__speaker {
+  position: absolute;
+  top: 50%;
+  left: 0.35rem;
+  width: 0.22rem;
+  height: 0.22rem;
+  transform: translateY(-50%);
+  border-radius: 999px;
+  background: hsl(220 14% 20%);
+}
+
+.device-frame--tablet .device-frame__camera {
+  display: none;
+}
+
+.device-frame__screen {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  background: hsl(220 14% 10%);
+}
+
+.device-frame--phone .device-frame__screen {
+  border-radius: 1.2rem;
+}
+
+.device-frame--tablet .device-frame__screen {
+  border-radius: 0.65rem;
+}
+
+.dark .device-frame {
+  box-shadow:
+    0 18px 40px -18px hsl(0 0% 0% / 0.7),
+    inset 0 0 0 1px hsl(0 0% 100% / 0.1);
+}
+
+/* Project cards */
+.project-card {
+  transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
+}
+
+.project-card:hover,
+.project-card:focus-visible {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 30px -22px hsl(222 47% 11% / 0.45);
+}
+
+.project-card:hover .device-frame,
+.project-card:focus-visible .device-frame {
+  transform: translateY(-2px) scale(1.02);
+}
+
+.project-card .device-frame {
+  transition: transform 0.28s ease;
+}
+
+.project-filter-item {
+  transition: opacity 0.28s ease, transform 0.28s ease;
+}
+
+.project-filter-item[data-hidden="true"] {
+  opacity: 0;
+  transform: scale(0.97);
+  pointer-events: none;
+  position: absolute;
+  width: 0 !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  overflow: hidden;
+}
+
+.gallery-track {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  padding-bottom: 0.5rem;
+  -webkit-overflow-scrolling: touch;
+}
+
+.gallery-track > * {
+  scroll-snap-align: center;
+  flex: 0 0 auto;
+}
+
+.timeline {
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 0.35rem;
+  top: 0.25rem;
+  bottom: 0.25rem;
+  width: 2px;
+  background: hsl(var(--border));
+}
+
+.timeline-item {
+  position: relative;
+  padding-bottom: 1.75rem;
+}
+
+.timeline-item:last-child {
+  padding-bottom: 0;
+}
+
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  left: -1.28rem;
+  top: 0.4rem;
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 999px;
+  background: hsl(var(--primary));
+  box-shadow: 0 0 0 3px hsl(var(--background));
+}
+
+.health-placeholder {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  background: linear-gradient(160deg, hsl(198 72% 42%), hsl(162 55% 36%));
+  color: white;
+  padding: 1rem;
+  text-align: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .project-card,
+  .project-card .device-frame,
+  .project-filter-item,
+  .gallery-track {
+    transition: none !important;
+    scroll-behavior: auto;
+  }
+
+  .project-card:hover,
+  .project-card:focus-visible,
+  .project-card:hover .device-frame,
+  .project-card:focus-visible .device-frame {
+    transform: none;
+  }
 }
