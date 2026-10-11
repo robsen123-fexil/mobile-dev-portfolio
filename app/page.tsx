@@ -123,6 +123,7 @@ type Project = {
   alt: string
   highlight?: string
   featured?: boolean
+  tint: string
 }
 
 const projects: Project[] = [
@@ -130,7 +131,7 @@ const projects: Project[] = [
     id: "shopally",
     title: "ShopAlly",
     client: "A2SV team project · Mobile Team Lead",
-    clientChip: "A2SV team project",
+    clientChip: "Team Project",
     role: "Mobile Team Lead",
     description:
       "AI-powered Alibaba shopping app: describe what you need in your own language and get matching products, with a creative e-commerce UI. Won 1st place in the A2SV G6 project phase for code quality and teamwork.",
@@ -139,6 +140,7 @@ const projects: Project[] = [
     device: "phone",
     featured: true,
     highlight: "1st Place, A2SV G6",
+    tint: "tint-amber",
     cover: "/projects/shopally/cover.webp",
     images: [
       "/projects/shopally/cover.webp",
@@ -158,28 +160,6 @@ const projects: Project[] = [
     alt: "ShopAlly welcome screen with yellow logo and AI shopping tagline",
   },
   {
-    id: "betlink",
-    title: "Betlink",
-    client: "Mobile property marketplace",
-    clientChip: "Mobile property marketplace",
-    role: "Mobile developer",
-    description:
-      "Property marketplace for buyers and sellers, with regression-tested search, filtering, and messaging across Android devices.",
-    technologies: ["Flutter", "Dart"],
-    category: "team",
-    device: "phone",
-    cover: "/projects/betlink/01.webp",
-    images: [
-      "/projects/betlink/01.webp",
-      "/projects/betlink/02.webp",
-      "/projects/betlink/03.webp",
-      "/projects/betlink/04.webp",
-      "/projects/betlink/05.webp",
-      "/projects/betlink/06.webp",
-    ],
-    alt: "Betlink welcome screen with login and register",
-  },
-  {
     id: "imerzn",
     title: "Imerzn",
     client: "US tour & travel agency client",
@@ -190,6 +170,7 @@ const projects: Project[] = [
     technologies: ["Flutter", "Dart", "REST APIs", "MVVM"],
     category: "client",
     device: "phone",
+    tint: "tint-blue",
     cover: "/projects/imerzn/cover.webp",
     images: [
       "/projects/imerzn/cover.webp",
@@ -211,6 +192,7 @@ const projects: Project[] = [
     technologies: ["Flutter", "Dart", "Supabase"],
     category: "client",
     device: "phone",
+    tint: "tint-rose",
     cover: "/projects/brunch/01.webp",
     images: [
       "/projects/brunch/01.webp",
@@ -233,6 +215,7 @@ const projects: Project[] = [
     technologies: ["Flutter", "Dart", "REST APIs", "AI integration"],
     category: "client",
     device: "phone",
+    tint: "tint-green",
     cover: "/projects/smartfarmer/01.webp",
     images: ["/projects/smartfarmer/01.webp", "/projects/smartfarmer/02.webp"],
     alt: "SmartFarmer result screen describing a soybean leaf disease and recommendations",
@@ -248,6 +231,7 @@ const projects: Project[] = [
     technologies: ["Flutter", "Dart"],
     category: "client",
     device: "tablet",
+    tint: "tint-teal",
     cover: "/projects/yenqal/01.webp",
     images: [
       "/projects/yenqal/01.webp",
@@ -270,6 +254,7 @@ const projects: Project[] = [
     github: "https://github.com/robsen123-fexil/autorent.flutter",
     category: "client",
     device: "phone",
+    tint: "tint-slate",
     cover: "/projects/autorent/03.webp",
     images: [
       "/projects/autorent/03.webp",
@@ -279,6 +264,29 @@ const projects: Project[] = [
       "/projects/autorent/01.webp",
     ],
     alt: "AutoRent car rental screens showing vehicle search, details, and booking",
+  },
+  {
+    id: "betlink",
+    title: "Betlink",
+    client: "Mobile property marketplace",
+    clientChip: "Team Project",
+    role: "Mobile developer",
+    description:
+      "Property marketplace for buyers and sellers, with regression-tested search, filtering, and messaging across Android devices.",
+    technologies: ["Flutter", "Dart"],
+    category: "team",
+    device: "phone",
+    tint: "tint-green",
+    cover: "/projects/betlink/01.webp",
+    images: [
+      "/projects/betlink/01.webp",
+      "/projects/betlink/02.webp",
+      "/projects/betlink/03.webp",
+      "/projects/betlink/04.webp",
+      "/projects/betlink/05.webp",
+      "/projects/betlink/06.webp",
+    ],
+    alt: "Betlink welcome screen with login and register",
   },
   {
     id: "ai-health",
@@ -292,6 +300,7 @@ const projects: Project[] = [
     github: "https://github.com/robsen123-fexil/ai-health-assistant-app",
     category: "other",
     device: "phone",
+    tint: "tint-neutral",
     images: [],
     alt: "AI Health Assistant placeholder",
   },
@@ -367,6 +376,25 @@ function ProjectVisual({
   )
 }
 
+function TechRow({ technologies, max = 3 }: { technologies: string[]; max?: number }) {
+  const visible = technologies.slice(0, max)
+  const overflow = technologies.length - visible.length
+  return (
+    <div className="flex flex-nowrap items-center justify-start gap-2 overflow-hidden">
+      {visible.map((tech) => (
+        <Badge key={tech} variant="secondary" className="shrink-0">
+          {tech}
+        </Badge>
+      ))}
+      {overflow > 0 && (
+        <Badge variant="outline" className="shrink-0">
+          +{overflow}
+        </Badge>
+      )}
+    </div>
+  )
+}
+
 export default function Portfolio() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [mounted, setMounted] = useState(false)
@@ -412,7 +440,7 @@ export default function Portfolio() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <nav className="fixed top-0 z-50 w-full border-b bg-background/80 backdrop-blur-md">
-        <div className="container mx-auto px-4 py-3">
+        <div className="site-container py-3">
           <div className="flex items-center justify-between">
             <button
               onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
@@ -475,34 +503,33 @@ export default function Portfolio() {
         </div>
       </nav>
 
-      <header className="px-4 pb-16 pt-28">
-        <div className="container mx-auto grid items-center gap-10 lg:grid-cols-[1.15fr_0.85fr]">
-          <div className="text-center lg:text-left">
-            <p className="mb-3 text-sm font-medium uppercase tracking-wide text-muted-foreground">
-              Robsen Teshome
-            </p>
-            <h1 className="text-3xl font-semibold leading-tight sm:text-5xl">
+      <header className="section-space pt-28">
+        <div className="site-container grid items-center gap-10 lg:grid-cols-[1fr_minmax(17rem,20rem)]">
+          <div>
+            <p className="mb-3 text-sm font-medium text-muted-foreground">Robsen Teshome</p>
+            <h1 className="max-w-xl text-3xl font-semibold tracking-tight sm:text-5xl">
               Mobile App Developer
             </h1>
             <p className="mt-3 text-lg text-muted-foreground">
               Flutter &amp; Mobile Application Development
             </p>
-            <p className="mt-2 flex items-center justify-center gap-2 text-sm text-muted-foreground lg:justify-start">
-              <MapPin className="h-4 w-4 shrink-0" aria-hidden />
-              Addis Ababa, Ethiopia · +251 940 046 254 · open to onsite or remote, prefers flexible remote
+            <p className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-muted-foreground">
+              <span className="inline-flex items-center gap-1.5">
+                <MapPin className="h-4 w-4 shrink-0" aria-hidden />
+                Addis Ababa, Ethiopia
+              </span>
+              <span aria-hidden>·</span>
+              <a href="tel:+251940046254" className="hover:text-foreground">
+                +251 940 046 254
+              </a>
+              <span aria-hidden>·</span>
+              <span>open to onsite or remote, prefers flexible remote</span>
             </p>
-            <div className="mt-6 inline-flex items-center gap-2 rounded-full border border-primary/30 bg-secondary px-4 py-2 text-sm font-medium">
+            <div className="mt-5 inline-flex items-center gap-2 rounded-md border bg-background px-3 py-1.5 text-sm font-medium">
               <Trophy className="h-4 w-4 text-primary" aria-hidden />
               Upwork Top Rated, 100% JSS
             </div>
-            <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground lg:mx-0">
-              Mobile App Developer with 3+ years of experience building production Flutter applications.
-              Upwork Top Rated freelancer with a 100% Job Success Score, working with clients worldwide.
-              Strong foundation in Flutter, Dart, REST APIs, Python (FastAPI, Django), cloud backend
-              services, and Supabase, with hands-on experience in regression testing, UI and cross-device
-              Android compatibility testing, API validation, and defect reporting.
-            </p>
-            <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row lg:justify-start">
+            <div className="mt-8 flex flex-wrap gap-3">
               <Button onClick={() => scrollToSection("projects")}>View projects</Button>
               <Button variant="outline" asChild>
                 <a href="/Robsen_Teshome_Mobile_Dev.pdf" download>
@@ -511,7 +538,7 @@ export default function Portfolio() {
                 </a>
               </Button>
             </div>
-            <div className="mt-8 flex justify-center gap-5 lg:justify-start">
+            <div className="mt-6 flex gap-4">
               <a
                 href="https://github.com/robsen123-fexil"
                 aria-label="GitHub"
@@ -542,51 +569,97 @@ export default function Portfolio() {
               </a>
             </div>
           </div>
-          <div className="flex justify-center">
-            <ProjectVisual project={featured} priority className="device-frame--phone w-[12.5rem] sm:w-[13.5rem]" />
+          <div className="device-stage">
+            <div className="phone-fan">
+              <div className="phone-fan__back">
+                <DeviceFrame variant="phone" src="/projects/shopally/01.webp" alt="" priority />
+              </div>
+              <div className="phone-fan__front">
+                <DeviceFrame variant="phone" src={featured.cover} alt={featured.alt} priority />
+              </div>
+            </div>
           </div>
         </div>
       </header>
 
       <main>
-        <section id="about" className="bg-muted/40 px-4 py-16">
-          <div className="container mx-auto max-w-3xl">
-            <h2 className="text-2xl font-semibold sm:text-3xl">About</h2>
-            <p className="mt-4 leading-relaxed text-muted-foreground">
-              I look for clear roles with an individual-contributor track, room to grow as a mobile
-              engineer, challenging mobile product problems, and a quiet, product-focused team.
-              Preferred stack: Flutter, Dart, Python, FastAPI, Django, Supabase, REST APIs, and Clean
-              Architecture.
-            </p>
-          </div>
-        </section>
-
-        <section id="skills" className="px-4 py-16">
-          <div className="container mx-auto max-w-5xl">
-            <h2 className="text-2xl font-semibold sm:text-3xl">Skills</h2>
-            <div className="mt-8 space-y-6">
-              {skillGroups.map((group) => (
-                <div key={group.title}>
-                  <h3 className="mb-3 flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-muted-foreground">
-                    <group.icon className="h-4 w-4 text-primary" aria-hidden />
-                    {group.title}
-                  </h3>
-                  <div className="flex flex-wrap gap-2">
-                    {group.items.map((item) => (
-                      <Badge key={item} variant="secondary" className="rounded-md px-3 py-1 text-sm font-normal">
-                        {item}
-                      </Badge>
-                    ))}
-                  </div>
+        <section id="about" className="section-space border-y bg-muted/30">
+          <div className="site-container">
+            <div className="about-grid">
+              <div>
+                <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">About</h2>
+                <div className="about-copy mt-6 space-y-4 text-base leading-relaxed text-muted-foreground">
+                  <p>
+                    Mobile App Developer with 3+ years of experience building production Flutter applications.
+                    Upwork Top Rated freelancer with a 100% Job Success Score, working with clients worldwide.
+                    Strong foundation in Flutter, Dart, REST APIs, Python (FastAPI, Django), cloud backend
+                    services, and Supabase, with hands-on experience in regression testing, UI and cross-device
+                    Android compatibility testing, API validation, and defect reporting.
+                  </p>
+                  <p>
+                    I look for clear roles with an individual-contributor track, room to grow as a mobile
+                    engineer, challenging mobile product problems, and a quiet, product-focused team.
+                    Preferred stack: Flutter, Dart, Python, FastAPI, Django, Supabase, REST APIs, and Clean
+                    Architecture.
+                  </p>
                 </div>
-              ))}
+              </div>
+              <aside aria-label="Quick facts">
+                <dl className="about-facts">
+                  <div>
+                    <dt>Location</dt>
+                    <dd>Addis Ababa, Ethiopia</dd>
+                  </div>
+                  <div>
+                    <dt>Work setup</dt>
+                    <dd>onsite or remote, prefers flexible remote</dd>
+                  </div>
+                  <div>
+                    <dt>Languages</dt>
+                    <dd>English, Amharic</dd>
+                  </div>
+                  <div className="inline-flex w-fit items-center gap-2 rounded-md border bg-background px-3 py-1.5 text-sm font-medium">
+                    <Trophy className="h-4 w-4 text-primary" aria-hidden />
+                    Upwork Top Rated, 100% JSS
+                  </div>
+                </dl>
+              </aside>
             </div>
           </div>
         </section>
 
-        <section id="experience" className="bg-muted/40 px-4 py-16">
-          <div className="container mx-auto max-w-3xl">
-            <h2 className="text-2xl font-semibold sm:text-3xl">Experience</h2>
+        <section id="skills" className="section-space">
+          <div className="site-container">
+            <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">Skills</h2>
+            <div className="skills-grid mt-8">
+              {skillGroups.map((group) => {
+                const isMobile = group.title === "Mobile"
+                return (
+                  <article
+                    key={group.title}
+                    className={cn("skill-card", isMobile && "skills-grid__mobile")}
+                  >
+                    <h3 className="mb-4 flex items-center gap-2 text-base font-semibold">
+                      <group.icon className="h-4 w-4 text-primary" aria-hidden />
+                      {group.title}
+                    </h3>
+                    <div className="flex flex-wrap justify-start gap-2">
+                      {group.items.map((item) => (
+                        <span key={item} className="skill-chip">
+                          {item}
+                        </span>
+                      ))}
+                    </div>
+                  </article>
+                )
+              })}
+            </div>
+          </div>
+        </section>
+
+        <section id="experience" className="section-space border-y bg-muted/30">
+          <div className="site-container site-container--narrow">
+            <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">Experience</h2>
             <div className="timeline mt-8">
               {experience.map((job) => (
                 <article key={job.role} className="timeline-item">
@@ -606,15 +679,15 @@ export default function Portfolio() {
           </div>
         </section>
 
-        <section id="projects" className="px-4 py-16">
-          <div className="container mx-auto">
-            <h2 className="text-2xl font-semibold sm:text-3xl">Projects</h2>
+        <section id="projects" className="section-space">
+          <div className="site-container">
+            <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">Projects</h2>
 
             <div className="mt-6" role="group" aria-labelledby={filterLabelId}>
               <p id={filterLabelId} className="sr-only">
                 Filter projects
               </p>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap justify-start gap-2">
                 {filters.map((item) => (
                   <button
                     key={item.id}
@@ -634,71 +707,81 @@ export default function Portfolio() {
               </div>
             </div>
 
-            <div className="mt-8 min-h-[28rem]">
+            <div className="relative mt-8 min-h-[28rem]">
               {showFeatured && (
-                <button
-                  type="button"
-                  onClick={() => setActiveProject(featured)}
-                  className="project-card mb-8 grid w-full gap-8 rounded-2xl border bg-card p-6 text-left md:grid-cols-[minmax(0,12rem)_1fr] md:items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                >
-                  <div className="flex justify-center md:justify-start">
+                <article className="featured-case mb-8">
+                  <div className={cn("featured-case__stage", featured.tint)}>
                     <ProjectVisual project={featured} />
                   </div>
-                  <div>
-                    <div className="flex flex-wrap items-center gap-2">
-                      <h3 className="text-2xl font-semibold">{featured.title}</h3>
-                      <Badge variant="outline">{featured.role}</Badge>
+                  <div className="p-6 md:p-8">
+                    <div className="flex flex-wrap items-center justify-start gap-2">
+                      <Badge className="bg-primary/15 text-primary hover:bg-primary/15">Featured</Badge>
+                      <Badge variant="outline">{featured.clientChip}</Badge>
                       {featured.highlight && (
-                        <Badge className="bg-primary/15 text-primary hover:bg-primary/15">
+                        <Badge variant="secondary">
                           <Trophy className="mr-1 h-3 w-3" aria-hidden />
                           {featured.highlight}
                         </Badge>
                       )}
                     </div>
-                    <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{featured.description}</p>
-                    <div className="mt-4 flex flex-wrap gap-2">
+                    <h3 className="mt-4 text-2xl font-semibold">{featured.title}</h3>
+                    <p className="mt-1 text-sm text-muted-foreground">{featured.role}</p>
+                    <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{featured.description}</p>
+                    <div className="mt-4 flex flex-wrap justify-start gap-2">
                       {featured.technologies.map((tech) => (
                         <Badge key={tech} variant="secondary">
                           {tech}
                         </Badge>
                       ))}
                     </div>
+                    <div className="mt-6 flex flex-wrap justify-start gap-2">
+                      <Button size="sm" onClick={() => setActiveProject(featured)}>
+                        View details
+                      </Button>
+                    </div>
                   </div>
-                </button>
+                </article>
               )}
 
-              <div className="relative grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
+              <div className="projects-grid relative">
                 {gridProjects.map((project) => {
                   const visible = matchesFilter(project, filter)
                   return (
-                    <button
+                    <article
                       key={project.id}
-                      type="button"
                       data-hidden={!visible}
                       aria-hidden={!visible}
-                      tabIndex={visible ? 0 : -1}
-                      disabled={!visible}
-                      onClick={() => setActiveProject(project)}
-                      className="project-card project-filter-item flex flex-col rounded-2xl border bg-card p-5 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none"
+                      className="project-card project-filter-item"
                     >
-                      <div className="mb-5 flex min-h-[16rem] items-center justify-center">
+                      <div className={cn("project-mockup", project.tint)}>
                         <ProjectVisual project={project} />
                       </div>
-                      <h3 className="text-lg font-semibold">{project.title}</h3>
-                      <Badge variant="outline" className="mt-2 w-fit">
-                        {project.clientChip}
-                      </Badge>
-                      <p className="mt-3 line-clamp-2 text-sm leading-relaxed text-muted-foreground">
-                        {project.description}
-                      </p>
-                      <div className="mt-4 flex flex-wrap gap-2">
-                        {project.technologies.map((tech) => (
-                          <Badge key={tech} variant="secondary">
-                            {tech}
-                          </Badge>
-                        ))}
+                      <div className="flex flex-1 flex-col p-5">
+                        <h3 className="text-lg font-semibold">{project.title}</h3>
+                        <Badge variant="outline" className="mt-2 w-fit">
+                          {project.clientChip}
+                        </Badge>
+                        <p className="mt-3 line-clamp-2 text-sm leading-relaxed text-muted-foreground">
+                          {project.description}
+                        </p>
+                        <div className="mt-4">
+                          <TechRow technologies={project.technologies} />
+                        </div>
+                        <div className="mt-auto flex flex-wrap justify-start gap-2 pt-5">
+                          <Button size="sm" variant="outline" onClick={() => setActiveProject(project)}>
+                            View details
+                          </Button>
+                          {project.github && (
+                            <Button size="sm" variant="ghost" asChild>
+                              <a href={project.github} target="_blank" rel="noopener noreferrer">
+                                <Github className="mr-1 h-4 w-4" />
+                                GitHub
+                              </a>
+                            </Button>
+                          )}
+                        </div>
                       </div>
-                    </button>
+                    </article>
                   )
                 })}
               </div>
@@ -706,9 +789,9 @@ export default function Portfolio() {
           </div>
         </section>
 
-        <section id="education" className="bg-muted/40 px-4 py-16">
-          <div className="container mx-auto max-w-3xl">
-            <h2 className="text-2xl font-semibold sm:text-3xl">Education</h2>
+        <section id="education" className="section-space border-y bg-muted/30">
+          <div className="site-container site-container--narrow">
+            <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">Education</h2>
             <div className="mt-8 space-y-4">
               {education.map((item) => (
                 <article key={item.title} className="rounded-xl border bg-card p-5">
@@ -738,9 +821,9 @@ export default function Portfolio() {
           </div>
         </section>
 
-        <section id="achievements" className="px-4 py-16">
-          <div className="container mx-auto max-w-3xl">
-            <h2 className="text-2xl font-semibold sm:text-3xl">Achievements</h2>
+        <section id="achievements" className="section-space">
+          <div className="site-container site-container--narrow">
+            <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">Achievements</h2>
             <ul className="mt-8 space-y-3">
               {achievements.map((item) => (
                 <li key={item} className="flex gap-3 rounded-lg border bg-card p-4 text-sm leading-relaxed">
@@ -752,9 +835,9 @@ export default function Portfolio() {
           </div>
         </section>
 
-        <section id="contact" className="bg-muted/40 px-4 py-16">
-          <div className="container mx-auto max-w-3xl">
-            <h2 className="text-2xl font-semibold sm:text-3xl">Contact</h2>
+        <section id="contact" className="section-space border-y bg-muted/30">
+          <div className="site-container site-container--narrow">
+            <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">Contact</h2>
             <p className="mt-4 text-muted-foreground">
               Addis Ababa, Ethiopia. Open to onsite or remote work, and prefer flexible remote.
             </p>
@@ -822,24 +905,26 @@ export default function Portfolio() {
         </section>
       </main>
 
-      <footer className="border-t px-4 py-8 text-center text-sm text-muted-foreground">
-        © {new Date().getFullYear()} Robsen Teshome
+      <footer className="border-t px-4 py-8 text-sm text-muted-foreground">
+        <div className="site-container">© {new Date().getFullYear()} Robsen Teshome</div>
       </footer>
 
       <Dialog open={!!activeProject} onOpenChange={(open) => !open && setActiveProject(null)}>
         <DialogContent className="max-h-[90vh] max-w-3xl overflow-y-auto">
           {activeProject && (
             <>
-              <DialogHeader>
+              <DialogHeader className="text-left sm:text-left">
                 <DialogTitle>{activeProject.title}</DialogTitle>
                 <DialogDescription>
-                  {activeProject.clientChip} · {activeProject.role}
+                  {activeProject.client} · {activeProject.role}
                 </DialogDescription>
               </DialogHeader>
-              <p className="text-sm leading-relaxed text-muted-foreground">{activeProject.description}</p>
+              <p className="text-left text-sm leading-relaxed text-muted-foreground">
+                {activeProject.description}
+              </p>
               <div>
-                <h4 className="mb-2 text-sm font-semibold">Tech stack</h4>
-                <div className="flex flex-wrap gap-2">
+                <h4 className="mb-2 text-left text-sm font-semibold">Tech stack</h4>
+                <div className="flex flex-wrap justify-start gap-2">
                   {activeProject.technologies.map((tech) => (
                     <Badge key={tech} variant="secondary">
                       {tech}
@@ -856,7 +941,7 @@ export default function Portfolio() {
                 </Button>
               )}
               <div>
-                <h4 className="mb-3 text-sm font-semibold">Screenshots</h4>
+                <h4 className="mb-3 text-left text-sm font-semibold">Screenshots</h4>
                 {activeProject.images.length > 0 ? (
                   <div
                     ref={galleryRef}
@@ -880,7 +965,7 @@ export default function Portfolio() {
                     ))}
                   </div>
                 ) : (
-                  <div className="flex justify-center py-2">
+                  <div className="flex justify-start py-2">
                     <DeviceFrame variant="phone" className="w-[10.5rem]">
                       <HealthPlaceholder />
                     </DeviceFrame>
