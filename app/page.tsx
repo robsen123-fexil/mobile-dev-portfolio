@@ -139,8 +139,9 @@ const projects: Project[] = [
     device: "phone",
     featured: true,
     highlight: "1st Place, A2SV G6",
-    cover: "/projects/shopally/01.webp",
+    cover: "/projects/shopally/cover.webp",
     images: [
+      "/projects/shopally/cover.webp",
       "/projects/shopally/01.webp",
       "/projects/shopally/02.webp",
       "/projects/shopally/03.webp",
@@ -154,7 +155,7 @@ const projects: Project[] = [
       "/projects/shopally/11.webp",
       "/projects/shopally/12.webp",
     ],
-    alt: "ShopAlly product grid showing Alibaba listings in a Flutter shopping app",
+    alt: "ShopAlly welcome screen with yellow logo and AI shopping tagline",
   },
   {
     id: "imerzn",
