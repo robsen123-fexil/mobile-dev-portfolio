@@ -190,14 +190,15 @@ const projects: Project[] = [
     technologies: ["Flutter", "Dart", "REST APIs", "MVVM"],
     category: "client",
     device: "phone",
-    cover: "/projects/imerzn/03-screen.webp",
+    cover: "/projects/imerzn/cover.webp",
     images: [
+      "/projects/imerzn/cover.webp",
       "/projects/imerzn/03-screen.webp",
       "/projects/imerzn/01-screen.webp",
       "/projects/imerzn/04-screen.webp",
       "/projects/imerzn/02-screen.webp",
     ],
-    alt: "Imerzn tour and travel mobile app screen",
+    alt: "Imerzn login screen with Welcome Back and travel branding",
   },
   {
     id: "brunch",
