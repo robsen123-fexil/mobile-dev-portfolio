@@ -544,7 +544,7 @@ export default function Portfolio() {
             <div className="mt-8 flex flex-wrap gap-3">
               <Button onClick={() => scrollToSection("projects")}>View projects</Button>
               <Button variant="outline" asChild>
-                <a href="/Robsen_Teshome_Mobile_Dev.pdf" download>
+                <a href="/Robsen_Teshome_MDev.pdf" download="Robsen_Teshome_MDev.pdf">
                   <Download className="mr-2 h-4 w-4" />
                   Download Resume
                 </a>
