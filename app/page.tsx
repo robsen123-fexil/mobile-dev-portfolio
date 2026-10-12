@@ -223,11 +223,11 @@ const projects: Project[] = [
   {
     id: "yenqal",
     title: "Yeneqal",
-    client: "Linguistic language learning · US-based client",
-    clientChip: "Linguistic Language Learning",
+    client: "Augmentative and Alternative Communication · US-based client",
+    clientChip: "Augmentative and Alternative Communication",
     role: "Mobile developer",
     description:
-      "Amharic-augmented linguistic language learning app for young children, built for a US-based client, with a kid-friendly tablet mode and tap-to-hear audio.",
+      "Amharic-augmented Augmentative and Alternative Communication app for young children, built for a US-based client, with a kid-friendly tablet mode and tap-to-hear audio.",
     technologies: ["Flutter", "Dart"],
     category: "client",
     device: "tablet",
