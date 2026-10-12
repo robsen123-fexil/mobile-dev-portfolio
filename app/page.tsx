@@ -199,7 +199,7 @@ const projects: Project[] = [
     clientChip: "Event",
     role: "Mobile developer",
     description:
-      "Mobile work for an event platform client from the US: moved an event creation and management platform from Base44 to a live mobile app using Flutter and Supabase.",
+      "Built a live Flutter and Supabase mobile app for event creation and management, migrating the platform from Base44 for a US-based client.",
     technologies: ["Flutter", "Dart", "Supabase"],
     category: "client",
     device: "phone",
