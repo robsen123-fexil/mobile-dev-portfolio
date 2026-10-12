@@ -199,7 +199,7 @@ const projects: Project[] = [
     clientChip: "Event",
     role: "Mobile developer",
     description:
-      "For a US-based client, built a live Flutter and Supabase mobile app for event creation and management, migrating the platform from Base44.",
+      "Developed a live mobile application using Flutter and Supabase for a US-based client, transitioning the existing event creation and management platform from Base44.",
     technologies: ["Flutter", "Dart", "Supabase"],
     category: "client",
     device: "phone",
@@ -238,7 +238,7 @@ const projects: Project[] = [
     clientChip: "Augmentative and Alternative Communication",
     role: "Mobile developer",
     description:
-      "US-based client project: an Amharic-augmented Augmentative and Alternative Communication app for young children, with a kid-friendly tablet mode and tap-to-hear audio.",
+      "Delivered an Amharic-supported AAC application designed for young children, featuring accessible navigation, child-friendly visuals, and tap-to-hear functionality.",
     technologies: ["Flutter", "Dart"],
     category: "client",
     device: "tablet",
