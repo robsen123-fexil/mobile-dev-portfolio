@@ -199,7 +199,7 @@ const projects: Project[] = [
     clientChip: "Event",
     role: "Mobile developer",
     description:
-      "For a US client, moved an event creation and management platform from Base44 to a live mobile app using Flutter and Supabase.",
+      "Mobile work for an event platform client from the US: moved an event creation and management platform from Base44 to a live mobile app using Flutter and Supabase.",
     technologies: ["Flutter", "Dart", "Supabase"],
     category: "client",
     device: "phone",
@@ -222,7 +222,7 @@ const projects: Project[] = [
     clientChip: "Agricultural Product",
     role: "Mobile developer",
     description:
-      "Agricultural product that captures images, sends them to an AI dataset backend, and displays the returned result. Includes a chat with an AI bot and a library of books on agricultural diseases.",
+      "Agricultural product for a Hubstaff client from India that captures images, sends them to an AI dataset backend, and displays the returned result. Includes a chat with an AI bot and a library of books on agricultural diseases.",
     technologies: ["Flutter", "Dart", "REST APIs", "AI integration"],
     category: "client",
     device: "phone",
