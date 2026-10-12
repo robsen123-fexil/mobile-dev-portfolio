@@ -81,14 +81,14 @@ const skillGroups = [
 
 const experience = [
   {
-    role: "Freelance Mobile Developer (Flutter)",
-    org: "Upwork",
-    place: "Remote",
-    period: "Present",
+    role: "Mobile Developer Intern (Flutter)",
+    org: "Internship Program, MinT",
+    place: "Addis Ababa",
+    period: "2023–2024",
     points: [
-      "Upwork Top Rated freelancer with a 100% Job Success Score, working with clients worldwide.",
-      "Built production Flutter apps for clients, including tour and travel, event platforms, AAC, agriculture, and rental booking products.",
-      "Integrated REST APIs, Supabase, and cloud backend services, with regression testing, UI and cross-device Android compatibility testing, API validation, and defect reporting.",
+      "Worked with a team on mobile application development, building Flutter apps with cloud backend services for auth, storage, and real-time features.",
+      "Ran regression and manual UI testing across Android devices, reporting defects that improved stability.",
+      "Built and validated backend APIs, checking request/response behavior and data integrity.",
     ],
   },
   {
@@ -103,14 +103,14 @@ const experience = [
     ],
   },
   {
-    role: "Mobile Developer Intern (Flutter)",
-    org: "Internship Program, MinT",
-    place: "Addis Ababa",
-    period: "2023–2024",
+    role: "Freelance Mobile Developer (Flutter)",
+    org: "Upwork",
+    place: "Remote",
+    period: "Present",
     points: [
-      "Worked with a team on mobile application development, building Flutter apps with cloud backend services for auth, storage, and real-time features.",
-      "Ran regression and manual UI testing across Android devices, reporting defects that improved stability.",
-      "Built and validated backend APIs, checking request/response behavior and data integrity.",
+      "Upwork Top Rated freelancer with a 100% Job Success Score, working with clients worldwide.",
+      "Built production Flutter apps for clients, including tour and travel, event platforms, AAC, agriculture, and rental booking products.",
+      "Integrated REST APIs, Supabase, and cloud backend services, with regression testing, UI and cross-device Android compatibility testing, API validation, and defect reporting.",
     ],
   },
 ]
