@@ -6,20 +6,29 @@ import { ThemeProvider } from "@/components/theme-provider"
 
 const inter = Inter({ subsets: ["latin"] })
 
+const title = "Robsen Teshome | Flutter Mobile App Developer"
+const description =
+  "Mobile App Developer in Addis Ababa with 3+ years building production Flutter apps. Upwork Top Rated, 100% Job Success Score. Flutter, Dart, Python, FastAPI, Django, and Supabase."
+
 export const metadata: Metadata = {
-  title: "Robsen Teshome - Full-Stack Mobile Developer",
-  description:
-    "Professional portfolio of Robsen Teshome, a Full-Stack Mobile Developer specializing in Flutter,backend development, and competitive programming. A2SV trainee with strong problem-solving skills.",
+  title,
+  description,
   keywords:
-    "mobile app developer, flutter developer, backend developer, competitive programming, A2SV, leetcode, portfolio",
+    "Robsen Teshome, Flutter developer, mobile app developer, Dart, Addis Ababa, Upwork, Supabase, FastAPI",
   authors: [{ name: "Robsen Teshome" }],
+  metadataBase: new URL("https://robsenteshome.vercel.app"),
   openGraph: {
-    title: "Robsen Teshome - Full-Stack Mobile Developer",
-    description:
-      "Professional portfolio showcasing mobile app development, backend solutions, and competitive programming achievements",
+    title,
+    description,
     type: "website",
+    url: "https://robsenteshome.vercel.app/",
+    siteName: "Robsen Teshome",
   },
-    generator: 'v0.dev'
+  twitter: {
+    card: "summary",
+    title,
+    description,
+  },
 }
 
 export default function RootLayout({
@@ -30,7 +39,13 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="light"
+          enableSystem={false}
+          storageKey="portfolio-theme"
+          disableTransitionOnChange
+        >
           {children}
         </ThemeProvider>
       </body>
