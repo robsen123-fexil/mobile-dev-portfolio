@@ -162,11 +162,11 @@ const projects: Project[] = [
   {
     id: "imerzn",
     title: "Imerzn",
-    client: "US tour & travel agency client",
-    clientChip: "US Client",
+    client: "Tour and travel · US client",
+    clientChip: "Tour and Travel",
     role: "Mobile developer",
     description:
-      "Mobile work for a US tour and travel agency, connecting them with travelers and supporting their shipping workflow. Integrated the client's live backend and built the UI with MVVM.",
+      "Mobile work for a tour and travel agency client from the US, connecting them with travelers and supporting their shipping workflow. Integrated the client's live backend and built the UI with MVVM.",
     technologies: ["Flutter", "Dart", "REST APIs", "MVVM"],
     category: "client",
     device: "phone",
@@ -184,11 +184,11 @@ const projects: Project[] = [
   {
     id: "brunch",
     title: "Brunch Sister",
-    client: "US client",
-    clientChip: "US Client",
+    client: "Event · US client",
+    clientChip: "Event",
     role: "Mobile developer",
     description:
-      "Moved an event creation and management platform from Base44 to a live mobile app using Flutter and Supabase.",
+      "Moved an event creation and management platform from Base44 to a live mobile app using Flutter and Supabase for a US client.",
     technologies: ["Flutter", "Dart", "Supabase"],
     category: "client",
     device: "phone",
@@ -223,11 +223,11 @@ const projects: Project[] = [
   {
     id: "yenqal",
     title: "Yeneqal",
-    client: "US client",
-    clientChip: "US Client",
+    client: "Linguistic language learning · US-based client",
+    clientChip: "Linguistic Language Learning",
     role: "Mobile developer",
     description:
-      "Amharic-augmented language learning app for young children, with a kid-friendly tablet mode and tap-to-hear audio.",
+      "Amharic-augmented linguistic language learning app for young children, built for a US-based client, with a kid-friendly tablet mode and tap-to-hear audio.",
     technologies: ["Flutter", "Dart"],
     category: "client",
     device: "tablet",
@@ -245,11 +245,11 @@ const projects: Project[] = [
   {
     id: "autorent",
     title: "AutoRent",
-    client: "Local client",
-    clientChip: "Local Client",
+    client: "Automated rental booking · Mohammed local marketplace",
+    clientChip: "Automated Rental Booking",
     role: "Mobile developer",
     description:
-      "Vehicle rental platform for a local client and its local customers: real-time availability, automated booking, and payments.",
+      "Automated rental booking platform for Mohammed's local marketplace and its local customers: real-time availability, automated booking, and payments.",
     technologies: ["Flutter", "Cloud Backend Services"],
     github: "https://github.com/robsen123-fexil/autorent.flutter",
     category: "client",
