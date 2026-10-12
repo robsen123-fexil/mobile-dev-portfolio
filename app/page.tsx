@@ -199,7 +199,7 @@ const projects: Project[] = [
     clientChip: "Event",
     role: "Mobile developer",
     description:
-      "Moved an event creation and management platform from Base44 to a live mobile app using Flutter and Supabase for a US client.",
+      "For a US client, moved an event creation and management platform from Base44 to a live mobile app using Flutter and Supabase.",
     technologies: ["Flutter", "Dart", "Supabase"],
     category: "client",
     device: "phone",
@@ -218,11 +218,11 @@ const projects: Project[] = [
   {
     id: "smartfarmer",
     title: "SmartFarmer",
-    client: "Hubstaff client from India",
-    clientChip: "Hubstaff Client from India",
+    client: "Agricultural product",
+    clientChip: "Agricultural Product",
     role: "Mobile developer",
     description:
-      "Captures images, sends them to an AI dataset backend, and displays the returned result. Includes a chat with an AI bot and a library of books on agricultural diseases.",
+      "Agricultural product that captures images, sends them to an AI dataset backend, and displays the returned result. Includes a chat with an AI bot and a library of books on agricultural diseases.",
     technologies: ["Flutter", "Dart", "REST APIs", "AI integration"],
     category: "client",
     device: "phone",
@@ -243,15 +243,16 @@ const projects: Project[] = [
     category: "client",
     device: "tablet",
     tint: "tint-teal",
-    cover: "/projects/yenqal/01.webp",
+    cover: "/projects/yenqal/cover.webp",
     images: [
+      "/projects/yenqal/cover.webp",
       "/projects/yenqal/01.webp",
       "/projects/yenqal/02.webp",
       "/projects/yenqal/03.webp",
       "/projects/yenqal/04.webp",
       "/projects/yenqal/05.webp",
     ],
-    alt: "Yeneqal tablet screen of illustrated Amharic communication tiles",
+    alt: "Yeneqal Augmentative and Alternative Communication tablet grid in Amharic",
   },
   {
     id: "autorent",
